@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --universalPadding: 10px;
+  --universalBorderRadius: 5px;
+}
+
+.container {
+  width: 500px;
+  margin: 100px auto;
+  outline: 2px solid black;
+  border-radius: var(--universalBorderRadius);
+}
+
+.container #form {
+  font-size: 1.3rem;
+  padding: var(--universalPadding);
+  display: grid;
+  text-align: center;
+  gap: 10px;
+}
+
+input, option, select {
+  font-size: 1.1rem;
+  text-align: center;
+  border-radius: var(--universalBorderRadius);
+  padding: 3px;
+}
+
+input[type='submit'] {
+  padding: 5px 10px;
+}
+
+.submit-button {
+  margin-top: 15px;
+  padding-top: calc(var(--universalPadding));
+  border-top: 1px solid black;
+}

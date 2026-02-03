@@ -13,7 +13,7 @@ const checkConnection = async () => {
     console.log("database connection success");
     connection.release();
   } catch (error) {
-    console.log("connection to database error");
+    console.log("Log db_communication.js : connection to database error");
     throw error;
   }
 };

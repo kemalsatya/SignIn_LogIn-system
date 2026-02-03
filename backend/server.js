@@ -18,7 +18,7 @@ app.listen(PORT, async () => {
   try {
     await checkConnection();
   } catch (error) {
-    console.log("log Server : database tidak terhubung");
+    console.log("log Server.js : database tidak terhubung");
   }
 });
 

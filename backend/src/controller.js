@@ -39,11 +39,11 @@ export async function controller_submitPemesann(req, res) {
   }
 }
 
-export async function controller_ambilDataHalamanPesanan(res) {
+export async function controller_ambilDataHalamanPesanan(req, res) {
   try {
     let dataPesanan = await serviceFuntion.service_ambilDataHalamanPesanan();
-    res.render("halamanPemesanan", dataPesanan);
+    res.render("halamanPemesanan", { dataPesanan: dataPesanan });
   } catch (error) {
-    console.error(error.message);
+    console.error(`Log controller.js : ${error.message}`);
   }
 }

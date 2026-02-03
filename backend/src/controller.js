@@ -30,7 +30,7 @@ export async function controller_submitPemesann(req, res) {
   let checkValues = values.every((value) => {
     return value !== undefined && value !== null && value !== "";
   });
-  console.log(req.body);
+  // console.log(req.body);
   try {
     let sendData = await service_submitPemesanan(req.body);
   } catch (error) {

@@ -34,7 +34,7 @@ export async function service_ambilDataOnLoad() {
     };
   } catch (error) {
     console.log(`log : kesalahan saat query, `, error);
-    throw new Error("log : kesalahan saat query");
+    // throw new Error("log : kesalahan saat query");
   }
 }
 // kirim data
@@ -42,9 +42,6 @@ export async function service_submitPemesanan(data = {}) {
   let { barang, jumlah, pembayaran } = data;
   let query = `INSERT INTO pemesanan (id_barang, jumlah_barang, id_pembayaran)
     VALUES(?, ?, ?)`;
-  // barang = Number(barang);
-  // jumlah = Number(jumlah);
-  // pembayaran = Number(pembayaran);
 
   try {
     let [results] = await pool.execute(query, [barang, jumlah, pembayaran]);

@@ -9,20 +9,22 @@
     </head>
     <body>
         <div class="container-card">
+            <% for (let table of dataPesanan) { %>
             <div class="card">
                 <!-- gambar dari server -->
                 <div class="image_field"></div>
                 <div class="text_field">
                     <!-- nama barang dari database -->
-                    <h3 id="judul">Nama Barang</h3>
+                    <h3 id="judul"><%= table.nama_barang %></h3>
                     <ul>
                         <!-- data harga barang dari database -->
-                        <li>harga : </li>
+                        <li>harga : <%= table.harga_barang %></li>
                         <!-- data total pesanan barang dari database -->
-                        <li>total pesanan : </li>
+                        <li>total pesanan : <%= table.total_pesanan %></li>
                     </ul>
                 </div>
             </div>
+            <% } %>
         </div>
     </body>
 </html>

@@ -84,4 +84,6 @@ body {
 .submit-button {
     padding: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
 }

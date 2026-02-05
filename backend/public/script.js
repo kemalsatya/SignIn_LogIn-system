@@ -41,6 +41,13 @@ formPage.addEventListener("submit", (e) => {
   }
   // cara kelola data yang salah
   // let data = Object.entries(submitData);
-  let sendData = JSON.stringify(data);
-  // console.log(sendData);
+  let sendData;
+  if (data["passwordConfirmation"]) {
+    if (data["passwordConfirmation"] == data["password"]) {
+      sendData = JSON.stringify(data);
+    } else {
+      alert("Konfirmasi password salah");
+      formPage.reset();
+    }
+  }
 });

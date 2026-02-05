@@ -15,7 +15,7 @@ async function controller_ambilDataOnLoad() {
   }
 }
 
-export async function controller_renderIndex(res) {
+export async function controller_renderIndex(req, res) {
   try {
     let data = await controller_ambilDataOnLoad();
     res.render("index", { data: data });

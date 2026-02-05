@@ -1,42 +1,87 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --universalPadding: 10px;
-  --universalBorderRadius: 5px;
+    --universalPadding: 10px;
+    --universalBorderRadius: 5px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
-  width: 500px;
-  margin: 100px auto;
-  outline: 2px solid black;
-  border-radius: var(--universalBorderRadius);
+    width: 300px;
+    padding: var(--universalPadding);
+    border-radius: var(--universalBorderRadius);
+    outline: 1px solid black;
+    display: grid;
+    gap: 20px;
 }
 
-.container #form {
-  font-size: 1.3rem;
-  padding: var(--universalPadding);
-  display: grid;
-  text-align: center;
-  gap: 10px;
+.container .title {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
 }
 
-input, option, select {
-  font-size: 1.1rem;
-  text-align: center;
-  border-radius: var(--universalBorderRadius);
-  padding: 3px;
+.form {
+    display: grid;
+    gap: 10px;
 }
 
-input[type='submit'] {
-  padding: 5px 10px;
+.option-wrapper ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 10px;
+}
+
+.option-wrapper ul label {
+    cursor: pointer;
+    display: inherit;
+    outline: 1px dashed black;
+    padding: 5px var(--universalPadding);
+}
+
+.option-wrapper ul input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.option-wrapper ul input[type="radio"]:checked + label {
+    /* efeknya ke label, bukan ke inputnya */
+    background-color: darkgray;
+    outline: none;
+}
+
+.option-wrapper ul label:hover {
+    background-color: lightgray;
+}
+
+.form-input {
+    display: inherit;
+    gap: 6px;
+    border-top: 1px solid black;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.form-input .main-input {
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 5px var(--universalPadding);
 }
 
 .submit-button {
-  margin-top: 15px;
-  padding-top: calc(var(--universalPadding));
-  border-top: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
 }

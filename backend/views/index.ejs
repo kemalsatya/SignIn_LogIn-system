@@ -1,52 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Front End</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-
-    <div class="container">
-      <form id="form">
-        <!-- input nama barang -->
-        <label for="barang">Nama Barang : </label>
-        <!--<input type="text" id="barang" />-->
-        <select name="barang" id="barang">
-          <option value="">-- Pilih --</option>
-
-          <% for (let barang of data.requestDataBarang) { %>
-            <option value="<%= barang.id_barang %>">
-              <%= barang.nama_barang %>
-            </option>
-          <% } %>
-        </select>
-
-        <!-- input jumlah barang -->
-        <label for="jumlah">Jumlah Barang : </label>
-        <input type="number" id="jumlah" name="jumlah" value="0"/>
-
-        <!-- input jenis pembayaran -->
-        <label for="pembayaran">Pembayaran : </label>
-        <!--<input type="text" id="pembayaran">-->
-        <select name="pembayaran" id="pembayaran">
-          <option value="">-- Pilih --</option>
-
-          <% for (let bayar of data.requestDataPembayaran) {%>
-            <option value="<%= bayar.id_pembayaran%>"><%= bayar.tipe%></option>
-          <% } %>
-        </select>
-
-        <!-- input gambar bukti bayar (kalau bayar dengan transfer/qris) -->
-        <div id="input-tambahan"></div>
-
-        <div class="submit-button">
-          <input type="submit" value="submit" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Who are you</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title">Selamat Datang!</h1>
+            <form class="form">
+                <div class="option-wrapper">
+                    <ul>
+                        <li>
+                            <input
+                                type="radio"
+                                name="option"
+                                value="login"
+                                id="loginRadio"
+                                checked
+                            />
+                            <label for="loginRadio"> Login </label>
+                        </li>
+                        <li>
+                            <input
+                                type="radio"
+                                name="option"
+                                value="signup"
+                                id="signupRadio"
+                            />
+                            <label for="signupRadio"> Signup </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-input">
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        class="main-input"
+                        placeholder="Username"
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="main-input"
+                        placeholder="Password"
+                    />
+                    <!-- + password (konfirmasi) -->
+                    <div id="input-affected"></div>
+                </div>
+                <!-- value Login / Sign Up -->
+                <input
+                    type="submit"
+                    value="Login"
+                    name="submit"
+                    id="button-affected"
+                    class="submit-button"
+                />
+            </form>
         </div>
-      </form>
-    </div>
 
-  </body>
+        <form class="form1">
+            <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="username"
+            />
+            <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+            />
+            <input type="submit" name="submit" />
+        </form>
+    </body>
 </html>

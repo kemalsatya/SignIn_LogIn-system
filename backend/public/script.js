@@ -1,3 +1,5 @@
+import * as func from "./func_fetchData";
+
 let formPage = document.querySelector(".form");
 
 //// alternate condition
@@ -30,18 +32,14 @@ optionRadios.forEach((input) => {
   });
 });
 
-//// Password Confirmation
+//// Password Confirmation & Send Data
 formPage.addEventListener("submit", (e) => {
   e.preventDefault();
   let submitData = new FormData(formPage);
-  // cara kelola data
-  let data = {};
-  for (let [key, value] of submitData.entries()) {
-    data[key] = value;
-  }
-  // cara kelola data yang salah
-  // let data = Object.entries(submitData);
+
+  let data = Object.fromEntries(submitData);
   let sendData;
+
   if (data["passwordConfirmation"]) {
     if (data["passwordConfirmation"] == data["password"]) {
       sendData = JSON.stringify(data);
@@ -50,4 +48,9 @@ formPage.addEventListener("submit", (e) => {
       formPage.reset();
     }
   }
+
+  // kirim data
+  func.myFetchData("/loginsignup", data).then((data) => {
+    console.log("success: ", data);
+  });
 });

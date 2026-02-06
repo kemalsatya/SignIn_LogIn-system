@@ -72,7 +72,7 @@ body {
     gap: 6px;
     border-top: 1px solid black;
     margin-top: 10px;
-    padding-top: 10px;
+    padding-top: var(--universalPadding);
 }
 
 .form-input .main-input {

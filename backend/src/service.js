@@ -7,11 +7,10 @@ export async function post_login_account(data = {}) {
   try {
     query = `INSERT INTO ${process.env.TABLE_LOG_AKUN} (user_id, login_time)
            VALUES ((SELECT user_id FROM ${process.env.TABLE_AKUN} WHERE username = ?), ?)`;
-    [sendData] = pool.execute(query, [username, password]);
+    [sendData] = await pool.execute(query, [username, password]);
     //
     if (sendData.affectedRows > 0) {
       console.log("Log: Post Login Akun Berhasil");
-      return results.insertId;
     } else {
       throw new Error("Log: Post Login Akun Gagal");
     }
@@ -26,11 +25,10 @@ export async function post_signup_account(data = {}) {
   let { username, password } = data;
   try {
     query = `INSERT INTO ${process.env.TABLE_AKUN} (username, password) VALUES (?,?)`;
-    [sendData] = pool.execute(query, [username, password]);
+    [sendData] = await pool.execute(query, [username, password]);
     //
     if (sendData.affectedRows > 0) {
       console.log("Log: Post SignUp Akun Berhasil");
-      return results.insertId;
     } else {
       throw new Error("Log: Post SignUp Akun Gagal");
     }

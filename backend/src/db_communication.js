@@ -4,7 +4,7 @@ const pool = mysql2.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "FUllstack1",
+  database: "fullstack1",
 });
 
 const checkConnection = async () => {

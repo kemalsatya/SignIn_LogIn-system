@@ -15,11 +15,15 @@ export async function post_login_signup(req, res) {
   let { option, username, password } = req.body;
   let data = { username, password };
   let sendData;
+  if (!req.body) {
+    throw new Error("request kosong");
+  }
   try {
+    console.log(req.body);
     if (option === "login") {
-      sendData = serviceFunction.post_login_account(data);
+      sendData = await serviceFunction.post_login_account(data);
     } else if (option === "signup") {
-      sendData = serviceFunction.post_signup_account(data);
+      sendData = await serviceFunction.post_signup_account(data);
     }
     res.send({ output: "data berhasil disimpan" });
   } catch (error) {

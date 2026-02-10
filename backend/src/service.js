@@ -1,4 +1,5 @@
 import { pool } from "./db_communication.js";
+import * as addFunc from "./service_add.js";
 import "dotenv/config";
 
 export async function post_login_account(data = {}) {
@@ -21,14 +22,25 @@ export async function post_login_account(data = {}) {
 }
 
 export async function post_signup_account(data = {}) {
-  let query, sendData;
   let { username, password } = data;
+
+  try {
+    let check = await addFunc.checkUsernameExist(username);
+    if (check) {
+      throw new Error("Username sudah ada");
+    }
+  } catch (error) {
+    throw error;
+  }
+
+  let query, sendData;
   try {
     query = `INSERT INTO ${process.env.TABLE_AKUN} (username, password) VALUES (?,?)`;
     [sendData] = await pool.execute(query, [username, password]);
-    //
+
     if (sendData.affectedRows > 0) {
       console.log("Log: Post SignUp Akun Berhasil");
+      return true;
     } else {
       throw new Error("Log: Post SignUp Akun Gagal");
     }

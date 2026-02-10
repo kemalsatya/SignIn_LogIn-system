@@ -1,8 +1,5 @@
 import * as serviceFunction from "./service.js";
 
-// 0 : Login
-// 1 : Sign Up
-
 export async function get_render_login_signup(req, res) {
   try {
     res.render("index");
@@ -25,7 +22,10 @@ export async function post_login_signup(req, res) {
     } else if (option === "signup") {
       sendData = await serviceFunction.post_signup_account(data);
     }
-    res.send({ output: "data berhasil disimpan" });
+
+    if (sendData) {
+      res.send({ output: "data berhasil disimpan" });
+    }
   } catch (error) {
     console.log(error.message);
   }

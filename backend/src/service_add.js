@@ -1,21 +1,26 @@
 import { pool } from "./db_communication.js";
+import "dotenv/config";
 
 // cek apakah username sudah terdaftar
-export async function checkUsernameExist(username = String) {
+export async function checkUserExist(username = String) {
   // cek parameter
   if (typeof username != "string") {
     throw new Error("parameter bukan sebuah string");
   }
 
   // query
+  let result;
   try {
-    let query = `SELECT user_id, username FROM TABLE_AKUN WHERE username = (?)`;
-    let [result] = await pool.execute(query, username);
+    let query = `SELECT * FROM ${process.env.TABLE_AKUN} WHERE username = (?)`;
+    [result] = await pool.execute(query, [username]);
+    if (!result) {
+      throw new Error("Kesalahan saat query check user");
+    }
   } catch (error) {
-    console.error("error saat cek username:\n", error);
+    console.error("error saat cek akun:\n", error);
     throw error;
   }
 
   // cek dan kirim hasil
-  return result.length > 0 ? true : false;
+  return result[0];
 }

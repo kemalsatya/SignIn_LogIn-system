@@ -27,7 +27,6 @@ export async function post_login_signup(req, res) {
       res.send({ output: "data berhasil disimpan" });
     }
   } catch (error) {
-    // console.log(error.message);
     res.send({ output: `${error.message}` });
   }
 }

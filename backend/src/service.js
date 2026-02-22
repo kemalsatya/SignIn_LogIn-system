@@ -54,7 +54,6 @@ export async function post_signup_account(data = {}) {
     [sendData] = await pool.execute(query, [username, password]);
 
     if (sendData.affectedRows > 0) {
-      // console.log("Log: Post SignUp Akun Berhasil");
       return true;
     } else {
       throw new Error("Log: Post SignUp Akun Gagal");

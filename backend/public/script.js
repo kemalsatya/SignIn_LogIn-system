@@ -78,6 +78,7 @@ formPage.addEventListener("submit", (e) => {
     return;
   }
   formPage.reset();
+  
   // kirim data
   myFetchData("http://localhost:3001/loginsignup", sendData)
     .then((data) => {

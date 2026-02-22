@@ -1,5 +1,6 @@
 import express from "express";
 import { checkConnection } from "./src/db_communication.js";
+import session, { Session } from "express-session";
 import router from "./src/router.js";
 
 const app = express();
@@ -12,6 +13,15 @@ app.use(express.static("public"));
 
 // parsing data
 app.use(express.json());
+
+app.use(session({
+  secret: 'secret_key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000*60*60
+  }
+}))
 
 app.listen(PORT, async () => {
   console.log(`server running on http://localhost:${PORT}`);

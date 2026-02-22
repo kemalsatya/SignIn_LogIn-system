@@ -24,7 +24,6 @@ export async function post_login_account(data = {}) {
     [sendData] = await pool.execute(query, [username]);
     //
     if (sendData.affectedRows > 0) {
-      console.log("Log: Post Login Akun Berhasil");
       return true;
     } else {
       throw new Error("Log: Post Login Akun Gagal");
@@ -40,7 +39,6 @@ export async function post_signup_account(data = {}) {
 
   try {
     let check = await addFunc.checkUserExist(username);
-    console.log(check);
     if (check) {
       throw new Error("Username sudah ada");
     }

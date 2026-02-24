@@ -6,6 +6,35 @@ let optionRadios = optionWrapper.querySelectorAll('input[type="radio"]');
 let inputAffected = document.getElementById("input-affected");
 let buttonAffected = document.getElementById("button-affected");
 
+let toastNotification = document.getElementById("toast-notification");
+let toastMessage = document.getElementById("toast-message");
+
+// toast notification
+function showToast(message, type = "default") {
+  toastMessage.textContent = message;
+  toastNotification.classList.remove(
+    "toast-hidden",
+    "toast-error",
+    "toast-success",
+  );
+  toastNotification.classList.add("toast-visible");
+
+  if (type === "error" || type === "salah") {
+    toastNotification.classList.add("toast-error");
+  } else if (type === "success") {
+    toastNotification.classList.add("toast-success");
+  }
+
+  setTimeout(() => {
+    toastNotification.classList.remove(
+      "toast-visible",
+      "toast-error",
+      "toast-success",
+    );
+    toastNotification.classList.add("toast-hidden");
+  }, 3000);
+}
+
 // signup condition
 let optionChecked;
 optionRadios.forEach((input) => {
@@ -30,7 +59,7 @@ optionRadios.forEach((input) => {
   });
 });
 
-//// funsi post data
+//// fungsi post data
 async function myFetchData(url, data) {
   try {
     // kirim data
@@ -49,6 +78,7 @@ async function myFetchData(url, data) {
 
     // kelola response
     const result = await response.json();
+    return result;
     console.log(result);
   } catch (error) {
     console.error(`Fetch error:\n`, error);
@@ -67,24 +97,36 @@ formPage.addEventListener("submit", (e) => {
     if (data["passwordConfirmation"] == data["password"]) {
       sendData = JSON.stringify(data);
     } else {
-      alert("Konfirmasi password salah");
+      showToast("Konfirmasi password salah", "error");
+      formPage.reset();
+      return;
     }
   } else if (data["option"] == "login") {
     sendData = JSON.stringify(data);
   }
 
   if (!sendData) {
-    alert("data kosong / tidak bisa dikirim");
+    showToast("data kosong / tidak bisa dikirim", "error");
     return;
   }
   formPage.reset();
-  
+
   // kirim data
-  myFetchData("http://localhost:3001/loginsignup", sendData)
-    .then((data) => {
-      console.log("success: ", data);
+  myFetchData("http://localhost:3001/", sendData)
+    .then((responseData) => {
+      console.log("success: ", responseData);
+      if (responseData.output.includes("berhasil")) {
+        showToast(responseData.output, "success");
+      } else if (responseData.output.includes("Salah")) {
+        showToast(responseData.output, "error");
+      } else if (responseData.output.includes("Sudah Ada")) {
+        showToast(responseData.output, "error");
+      } else if (responseData.output.includes("Belum Ada")) {
+        showToast(responseData.output, "error");
+      }
     })
     .catch((error) => {
       console.error(error);
+      showToast(`Terjadi kesalahan: ${error.message}`, "error");
     });
 });

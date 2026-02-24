@@ -40,7 +40,7 @@ export async function post_signup_account(data = {}) {
   try {
     let check = await addFunc.checkUserExist(username);
     if (check) {
-      throw new Error("Username sudah ada");
+      throw new Error("Username Sudah Ada");
     }
   } catch (error) {
     throw error;

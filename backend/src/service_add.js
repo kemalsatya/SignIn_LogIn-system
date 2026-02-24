@@ -12,15 +12,12 @@ export async function checkUserExist(username = String) {
   let result;
   try {
     let query = `SELECT * FROM ${process.env.TABLE_AKUN} WHERE username = (?)`;
-    [result] = await pool.execute(query, [username]);
-    if (!result) {
-      throw new Error("Kesalahan saat query check user");
-    }
+    result = await pool.execute(query, [username]);
   } catch (error) {
     console.error("error saat cek akun:\n", error);
     throw error;
   }
 
   // cek dan kirim hasil
-  return result[0];
+  return result[0][0];
 }

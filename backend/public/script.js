@@ -9,6 +9,8 @@ let buttonAffected = document.getElementById("button-affected");
 let toastNotification = document.getElementById("toast-notification");
 let toastMessage = document.getElementById("toast-message");
 
+inputAffected.innerHTML = ``;
+
 // toast notification
 function showToast(message, type = "default") {
   toastMessage.textContent = message;
@@ -93,12 +95,16 @@ formPage.addEventListener("submit", (e) => {
   let data = Object.fromEntries(submitData);
   let sendData;
 
+  // let { option, ...rest } = data;
+
   if (data["option"] == "signup") {
     if (data["passwordConfirmation"] == data["password"]) {
       sendData = JSON.stringify(data);
     } else {
       showToast("Konfirmasi password salah", "error");
       formPage.reset();
+      optionRadios[1].checked = true;
+      optionRadios[0].checked = false;
       return;
     }
   } else if (data["option"] == "login") {
@@ -124,6 +130,8 @@ formPage.addEventListener("submit", (e) => {
       } else if (responseData.output.includes("Belum Ada")) {
         showToast(responseData.output, "error");
       }
+
+      inputAffected.innerHTML = ``;
     })
     .catch((error) => {
       console.error(error);

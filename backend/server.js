@@ -14,14 +14,17 @@ app.use(express.static("public"));
 // parsing data
 app.use(express.json());
 
-app.use(session({
-  secret: 'secret_key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000*60*60
-  }
-}))
+// session
+app.use(
+  session({
+    secret: "secret_key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+    },
+  }),
+);
 
 app.listen(PORT, async () => {
   console.log(`server running on http://localhost:${PORT}`);

@@ -1,10 +1,11 @@
 import mysql2 from "mysql2/promise";
+import "dotenv/config";
 
 const pool = mysql2.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "fullstack1",
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
 const checkConnection = async () => {

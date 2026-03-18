@@ -1,11 +1,26 @@
 import { pool } from "./db_communication.js";
 import * as addFunc from "./service_add.js";
 import "dotenv/config";
+import * as z from "zod";
+
+const Account = z.object({
+  username: z
+    .string({ message: "username is not a string!" })
+    .min(1, "username tidak boleh kosong!"),
+  password: z.string({ message: "password is not a string!" }),
+});
 
 export async function post_login_account(data = {}) {
   let query, sendData;
-  let { username, password } = data;
 
+  const result = Account.safeParse(data);
+  if (!result.success) {
+    let errors = result.error.issues.map((i) => i.message);
+    // throw errors;
+    throw new Error(errors);
+  }
+
+  let { username, password } = data;
   let check;
   try {
     check = await addFunc.checkUserExist(username);
@@ -35,6 +50,12 @@ export async function post_login_account(data = {}) {
 }
 
 export async function post_signup_account(data = {}) {
+  const result = Account.safeParse(data);
+  if (!result.success) {
+    let errors = result.error.issues.map((i) => i.message);
+    throw new Error(errors);
+  }
+
   let { username, password } = data;
 
   try {
